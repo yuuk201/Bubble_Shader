@@ -6,4 +6,4 @@
 2021.1.13f1
 
 ## 起動方法
-ダウンロードし, Unityを起動させ, Asset\SceneにあるBubbleSceneを立ち上げるとシャボン玉があるシーンを見ることができる. 
+ダウンロードし, Unityを起動させ, Assets\ScenesにあるBubbleSceneを立ち上げるとシャボン玉があるシーンを見ることができる. 
