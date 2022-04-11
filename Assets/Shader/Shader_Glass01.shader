@@ -5,36 +5,36 @@ Shader "Custom/Shader_Glass01" {
 		_Color      ("Color"     , Color      ) = (1, 1, 1, 1)
 		_Smoothness ("Smoothness", Range(0, 1)) = 1
         _Metallic ("Metallic", Range(0, 1)) = 1
-		_Alpha      ("Alpha"     , Range(0, 1)) = 0
-        _F0("F0", Float) = 0.02
-        _RimLightIntensity ("RimLight Intensity", Float) = 1.0
+		//_Alpha      ("Alpha"     , Range(0, 1)) = 0
+        //_F0("F0", Float) = 0.02
+        //_RimLightIntensity ("RimLight Intensity", Float) = 1.0
 
-        _BumpScale("Scale", Float) = 1.0
-        [Normal] _BumpMap("Normal Map", 2D) = "bump" {}
+        //_BumpScale("Scale", Float) = 1.0
+        //[Normal] _BumpMap("Normal Map", 2D) = "bump" {}
         [Enum(sRGB,1,Wide Gammut,2)]_Colorspace ("Color Space", int) = 1
         [Enum(D55,1,D65,2,D93,3)]_Colortemperature ("Color Temperature", int) = 1
-        [Enum(Soap,1)]_Refractiveindex ("Refractive Index", int) = 1
+        [Enum(Soap,1)]_Refractiveindex ("Thinfilm Material", int) = 1
         //[Enum(add,1,mult,2)]_Addormult ("Add or Mult", int) = 1
         [Header(Thin fllm interference)]
         //_Thinfilm("Thinfilm",Range(0,320))=0
         _ThinfilmMax("Thinfilm(nm) ", Range(0,400))=0
         _STalpha("Structual Color  Alpha", Range(0.0, 100.0)) = 1.0
         //_ThinfilmMin("Thinfilm Thickness 2nd (nm)", Range(0,400))=0
-        [MaterialToggle] _Changefilm ("Use Thickness Map", Float) = 0 
-        _CubeMap ("Cube Map", Cube) = "white" {}
+        //[MaterialToggle] _Changefilm ("Use Thickness Map", Float) = 0 
+        //_CubeMap ("Cube Map", Cube) = "white" {}
 
-        _ThinfilmTex("Thickness Map", 2D)="white" {}
-        _ThinfilmTex2("Thickness Map2", 2D)="white" {}
+        //_ThinfilmTex("Thickness Map", 2D)="white" {}
+        //_ThinfilmTex2("Thickness Map2", 2D)="white" {}
         
-        [HideInInspector] _ThinfilmRate("Thinfilm Rate", Range(0.0,10.0)) = 1.0//膜厚の変化を均等じゃなくするため, 掛ける値
-        _ThinfilmGamma("Thickness Map Gamma", Range(0.1,10.0)) = 1.0//膜厚の変化を線形変換でなく, ガンマ変換とする.　
+        //[HideInInspector] _ThinfilmRate("Thinfilm Rate", Range(0.0,10.0)) = 1.0//膜厚の変化を均等じゃなくするため, 掛ける値
+        //_ThinfilmGamma("Thickness Map Gamma", Range(0.1,10.0)) = 1.0//膜厚の変化を線形変換でなく, ガンマ変換とする.　
         
         //_Gausssigma("Sigma of Gauss", Range(0.1,10.0)) = 1.0
         //_Roughness("RoughnessGold", Range(0.0, 1.0)) = 0.5
         //_FresnelReflectance("FresnelReflectance", Range(0.0, 1.0)) = 0.5
         //_GoldColor("GoldColor", Color) = (1,0.84,0,1)
         //_GoldTex("GoldTexture",2D)="white"{}
-        _StrucPos("Structural Color Mask",2D)="white"{}
+        //_StrucPos("Structural Color Mask",2D)="white"{}
         [NoScaleOffset] _StructualTex_D55_Soap_sRGB("Structural Color LT_D55_Air_sRGB",3D)="white" {}
         [NoScaleOffset] _StructualTex_D55_Soap_wide("Structural Color LT_D55_Air_wide",3D)="white" {}
         [NoScaleOffset] _StructualTex_D65_Soap_sRGB("Structural Color LT_D65_Air_sRGB",3D)="white" {}
