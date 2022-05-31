@@ -103,6 +103,7 @@ Material:
     m_Floats:
     - _Addormult: 1
     - _Alpha: 0
+    - _AmbientLight: 0.018
     - _BumpScale: 1
     - _Changefilm: 0
     - _Colorspace: 2
