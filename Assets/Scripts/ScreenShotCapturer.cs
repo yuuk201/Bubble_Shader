@@ -11,7 +11,7 @@ public class ScreenShotCapturer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // スクリーンショットを保存
-            CaptureScreenShot("J:\\Datafolder\\Unity\\shader\\shader素材画像\\bubble_asahina.png");
+            CaptureScreenShot("J:\\Datafolder");
         }
     }
 
