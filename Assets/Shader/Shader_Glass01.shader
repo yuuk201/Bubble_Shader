@@ -89,7 +89,7 @@ Shader "Custom/Shader_Glass01" {
 				
 				v2f vert (appdata v) {
 					v2f o;
-                    float3 normalWorld = UnityObjectToWorldNormal(v.normal);
+                    float3 normalWorld = UnityObjectToWorldNormal(v.normal);//ワールド座標系の法線に変換
 
                     // added for SC support
                     o.normal=normalWorld;
@@ -125,7 +125,8 @@ Shader "Custom/Shader_Glass01" {
                     float3 viewDirectionNormal = normalize((float4(_WorldSpaceCameraPos, 1.0) - i.vpos).xyz);
                     float ndotv=max(0, dot(normal, viewDirectionNormal));
                     half4 c=half4(0,0,0,0);
-                    c+=half4(_Color,1);
+                    c+=half4(_Color,1)
+
                     c+=calc_struc(ndotl,ndotv,_ThinfilmMax)*_STalpha;
                     //c+=calc_struc_AL(ndotl,ndotv,_ThinfilmMax,_AmbientLight)*_STalpha;
                     //float rimlight=1.0 - dot(i.normal, i.viewDir);
@@ -155,7 +156,7 @@ Shader "Custom/Shader_Glass01" {
 					float4 vertex : SV_POSITION;
                     float4 vpos: TEXCOORD9;//追加。ワールド座標を保持しておく
 
-                    float3 normal:NORMAL;//追加
+                    float3 normal:TEXCOORD1;//追加
                     float3 tangent:TANGENT;//追加
                     float4 light : COLOR1;//追加
 
@@ -172,7 +173,7 @@ Shader "Custom/Shader_Glass01" {
                     float3 normalWorld = UnityObjectToWorldNormal(v.normal);
 
                     // added for SC support
-                    o.normal=normalWorld;
+                    o.normal=normalWorld;//法線のワールド座標を保持
                     o.vpos=mul(unity_ObjectToWorld, v.vertex);
 
                     o.viewDir  = normalize(ObjSpaceViewDir(v.vertex));

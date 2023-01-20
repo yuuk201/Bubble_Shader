@@ -121,13 +121,13 @@ Material:
     - _Parallax: 0.02
     - _Refractiveindex: 1
     - _RimLightIntensity: 0
-    - _STalpha: 22.1
+    - _STalpha: 6.1
     - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _ThinfilmGamma: 0.1
-    - _ThinfilmMax: 214
+    - _ThinfilmMax: 226.4
     - _ThinfilmMin: 0
     - _ThinfilmRate: 1
     - _UVSec: 0
