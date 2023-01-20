@@ -1,6 +1,6 @@
 # Bubble_Shader
 
-![bubble](https://user-images.githubusercontent.com/56100173/160367876-a6d5a009-891d-4518-9ee9-791699cf7512.JPG)
+![bubble](https://user-images.githubusercontent.com/56100173/213642630-1e689332-a942-4758-bb7e-01d8a5b16013.jpg)
 
 ## 薄膜による構造色とは
 シャボン玉は表面が薄膜になっており, 光が干渉しあう. 薄膜の厚さ(膜厚), 入射角, 反射角など多くのパラメータによって色が変わる. 入射角と反射角に依存して色が変わるため, 見る位置によって色が変わる. 
