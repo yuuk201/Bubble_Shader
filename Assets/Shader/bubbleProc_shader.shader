@@ -102,11 +102,14 @@ Shader "Unlit/bubbleProc_shader"
                 half4 alpha=half4(1,1,1,1-vdotn);
                 //
                 half4 c=half4(0,0,0,0);
+                ldotn=((ldotn+1)/2);
+                c+=calc_struc(ldotn,vdotn,_ThinfilmMax)*_STalpha;//
+                //c+=half4(1,0,0,0);
                 c+=Cube*alpha;//キューブマップと透明度を追加
                 //c=half4(1-vdotn,1-vdotn,1-vdotn,1.0);
 
-                ldotn=((ldotn+1)/2);
-                c+=calc_struc(ldotn,vdotn,_ThinfilmMax)*_STalpha;//
+                
+                
                 //c+=half4(1,0,0,1.0);
                 //c.a=1.0;
                 //c=calc_struc(i.ldotn,i.vdotn,_ThinfilmMax);
