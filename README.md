@@ -43,3 +43,25 @@
 
 
 構造色のルックアップテーブル. 横軸を入射角(0°から90°), 縦軸を膜厚(0nmから400nm), 奥行を反射角(0°から90°)として, それぞれの値の色が格納されている. Unityの3DTextureを用いている. 
+
+## 構造色を出すまでの流れ
+![flow](https://user-images.githubusercontent.com/56100173/213839988-7dd91bf8-93d7-4df1-88be-39f21c49c04c.jpg)
+
+本プログラムでの流れを上図に示す. 大まかな流れを説明する. まず, pythonプログラムを用いて構造色を事前計算する. 事前計算結果をルックアップテーブル(LUT)に格納する. そして, そのLUTのデータを参照する形で, Shaderプログラムが最終的な色を計算する. 以下に図で示しているプログラムファイルやLUTファイルの説明をする. 
+
+### create_colortemp_csv.py
+「hinfilmColor_LUT/」にあるプログラム. 
+光源スペクトルを計算し, csv形式で出力するプログラム.
+
+### strucmap.py
+「hinfilmColor_LUT/」にあるプログラム. 構造色を計算し, その計算結果をcsv形式で出力するファイル. 具体的なアルゴリズムの説明はここでは省略するが, 薄膜干渉の構造色を物理的に計算している. このLUTは膜厚, 入射角, 反射角をパラメータとして色を格納している. 
+
+### lin2012xyz2e_5_7sf.csv
+x,y,zそれぞれの等色関数の値が入ったcsvファイル. 
+https://zenodo.org/record/583697#.Y8tACXbP2Uk のデータを用いた. 
+
+### strucmap_create_usecsv.cs
+「Assets/Scripts/」にあるプログラム. csv形式のLUTを入力とし, Unityで扱えるTexture3D形式へと変換している. 
+
+### bubbleProc_shader.shader
+「Assets/Shader/」にあるプログラム. 最終的な色を計算しているシェーダープログラム. LUTを入力とし, 視点位置情報, 光源位置情報を用いて適切な色を取り出して出力している. 
