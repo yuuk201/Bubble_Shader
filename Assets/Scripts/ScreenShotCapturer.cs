@@ -11,7 +11,7 @@ public class ScreenShotCapturer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // スクリーンショットを保存
-            CaptureScreenShot("C:\\Users\\Owner\\Pictures\\bubble.png");
+            CaptureScreenShot("F:\\bubble.png");
         }
     }
 

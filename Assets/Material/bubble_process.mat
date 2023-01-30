@@ -60,27 +60,31 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _StructualTex_D55_Soap_sRGB:
-        m_Texture: {fileID: 11700000, guid: 30adca4db54a34541a3f931cd86a6258, type: 2}
+        m_Texture: {fileID: 11700000, guid: 09dbc49163be8c54d83415fbde2d9fe5, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _StructualTex_D55_Soap_wide:
-        m_Texture: {fileID: 11700000, guid: 1cf85485a3eb8964cbcf78614791ff36, type: 2}
+        m_Texture: {fileID: 11700000, guid: ded29cbe4f8738344a0258d3a33e72d6, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _StructualTex_D65_Soap_sRGB:
-        m_Texture: {fileID: 11700000, guid: 001ce895a82d3cf44b24f3d222504fe3, type: 2}
+        m_Texture: {fileID: 11700000, guid: 70d15545260d5994b85298f7c02bea1e, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _StructualTex_D65_Soap_wide:
-        m_Texture: {fileID: 11700000, guid: 2c8c06b90484bcb4e86b0f4c0e405caf, type: 2}
+        m_Texture: {fileID: 11700000, guid: f9765212bd46b424d85e57143a88132c, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _StructualTex_D93_Soap_sRGB:
-        m_Texture: {fileID: 11700000, guid: 4a537162b44d623498f0e3ba1449740a, type: 2}
+        m_Texture: {fileID: 11700000, guid: ccefd38f12170c143ab150cd4d536d2d, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _StructualTex_D93_Soap_wide:
-        m_Texture: {fileID: 11700000, guid: 7ead6486b2f8d5541a1c162b732bb11f, type: 2}
+        m_Texture: {fileID: 11700000, guid: 303728e3dc81f0b4294903fe2e50f253, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ThinfilmTex:
+        m_Texture: {fileID: 2800000, guid: be0415523d5b80e43b33e93c6364be5d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -101,12 +105,13 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Refractiveindex: 1
-    - _STalpha: 1
+    - _STalpha: 1.9
     - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _ThinfilmMax: 201
+    - _ThinfilmMax: 400
+    - _ThinfilmMin: 381.4
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:

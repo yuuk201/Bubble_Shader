@@ -1,6 +1,6 @@
 # Bubble_Shader
 
-![bubble](https://user-images.githubusercontent.com/56100173/213690641-aac9328d-3594-4668-b459-e23123d66185.jpg)
+![bubble](https://user-images.githubusercontent.com/56100173/215535191-ce8e16cc-149b-451b-8fae-92570304974e.jpg)
 
 ## 実行環境
 2021.1.13f1
