@@ -23,13 +23,13 @@
 
 
 光源の色温度を指定する. D光源の5500Kと6500Kと9300Kを選択することができる. 
-### Rthinfilm material
+### Film material
 
-![thinfilm material](https://user-images.githubusercontent.com/56100173/173701398-b4399026-1109-4d9f-a3a4-8f46de762df0.JPG)
+![filmmaterial](https://user-images.githubusercontent.com/56100173/215697317-069ba27f-e708-44c4-8e51-ee1e7df99061.JPG)
 
 薄膜の素材を選択できる。ここでは石鹸水であるsoapのみ選択可能
-### Thinfilm(nm)
-![thinfilm](https://user-images.githubusercontent.com/56100173/173701431-c7fe9c71-0676-478a-b3ea-881b15ecaa9f.JPG)
+### FilmThickness(nm)
+![filmthickness](https://user-images.githubusercontent.com/56100173/215697320-979e01f9-1530-4f95-9aa1-44e67f343403.JPG)
 
 シャボン玉の膜厚の値
 
@@ -40,8 +40,8 @@
 
 構造色とbasecolorテクスチャとのブレンド率を持つ. 
 
-### Structural Color LT
-![LUT](https://user-images.githubusercontent.com/56100173/173701477-e2902e1f-b6d5-431f-a911-e1976401f9df.JPG)
+### Structural Color LUT
+![luts](https://user-images.githubusercontent.com/56100173/215697552-f5903404-b667-4781-a263-c2fe39b62957.JPG)
 
 
 構造色のルックアップテーブル. 横軸を入射角(0°から90°), 縦軸を膜厚(0nmから400nm), 奥行を反射角(0°から90°)として, それぞれの値の色が格納されている. Unityの3DTextureを用いている. 

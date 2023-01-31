@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 556131925}
   - component: {fileID: 556131924}
   m_Layer: 0
-  m_Name: create_LUT
+  m_Name: Implement_C#Scripts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556131923}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29fa2742754dce346b83a6d2bb51b9dd, type: 3}
   m_Name: 

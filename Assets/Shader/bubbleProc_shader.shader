@@ -2,20 +2,14 @@ Shader "Unlit/bubbleProc_shader"
 {
     Properties
     {
-        [PowerSlider(0.1)] _F0 ("F0", Range(0.0, 1.0)) = 0.02
         _CubeMap ("Cube Map", Cube) = "white" {}
 
-        _Color      ("Color"     , Color      ) = (1, 1, 1, 1)
-		_Smoothness ("Smoothness", Range(0, 1)) = 1
-        _Metallic ("Metallic", Range(0, 1)) = 1
         [Enum(sRGB,1,Wide Gammut,2)]_Colorspace ("Color Space", int) = 1
         [Enum(D55,1,D65,2,D93,3)]_Colortemperature ("Color Temperature", int) = 1
-        [Enum(Soap,1)]_Refractiveindex ("Thinfilm Material", int) = 1
-        [Header(Thin fllm interference)]
-        _ThinfilmMax("Thinfilm Max(nm) ", Range(0,400))=0
-        _ThinfilmMin("Thinfilm Min(nm) ", Range(0,400))=0
-        _STalpha("Structual Color  Alpha", Range(0.0, 100.0)) = 1.0
-        _ThinfilmTex ("Thinfilm Texture", 2D) = "white" {}
+        [Enum(Soap,1)]_Refractiveindex ("Film Material", int) = 1
+        _FilmThickness("FilmThickness (nm) ", Range(0,400))=0
+        _StructuralColor_Alpha("Structual Color  Alpha", Range(0.0, 100.0)) = 1.0
+        //_FilmThickness_Texture ("FilmThickness Texture", 2D) = "white" {}
         [NoScaleOffset] _StructualTex_D55_Soap_sRGB("Structural Color LT_D55_Air_sRGB",3D)="white" {}
         [NoScaleOffset] _StructualTex_D55_Soap_wide("Structural Color LT_D55_Air_wide",3D)="white" {}
         [NoScaleOffset] _StructualTex_D65_Soap_sRGB("Structural Color LT_D65_Air_sRGB",3D)="white" {}
@@ -78,11 +72,8 @@ Shader "Unlit/bubbleProc_shader"
                 
                 return o;
             }
-            half _ThinfilmMax;
-            half _ThinfilmMin;
-            sampler2D _ThinfilmTex;
-            half _STalpha;
-            half _Inc;//増加率
+            half _FilmThickness;
+            half _StructuralColor_Alpha;
             
             fixed4 frag (v2f i) : SV_Target
             {
@@ -100,16 +91,14 @@ Shader "Unlit/bubbleProc_shader"
                 fixed4 Cube=UNITY_SAMPLE_TEXCUBE(_CubeMap, i.reflDir);
                 half4 alpha=half4(1,1,1,1-vdotn);
                 //
-                half4 c=half4(0,0,0,0);
+                half4 color=half4(0,0,0,0);
                 ldotn=pow(ldotn*0.5+0.5,2);//ハーフランバート
 
 
-                half thin_norm = tex2D(_ThinfilmTex, i.uv).r;
-                half d=_ThinfilmMin+thin_norm*(_ThinfilmMax-_ThinfilmMin);
-                c+=calc_struc(ldotn,vdotn,d)*_STalpha;
-                c+=Cube*alpha;//キューブマップと透明度を追加
+                color+=calc_struc(ldotn,vdotn,_FilmThickness)*_StructuralColor_Alpha;
+                color+=Cube*alpha;//キューブマップと透明度を追加
                 
-                return c;
+                return color;
             }
             ENDCG
         }
