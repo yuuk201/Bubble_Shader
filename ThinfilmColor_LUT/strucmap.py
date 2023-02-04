@@ -48,10 +48,10 @@ class StrucColor:#入射角と反射角と膜厚と屈折率と色空間と色�
   def Calc_Reflectance(self,wavelength):#構造色反射率を導出する関数
     IncidenceAngle_Radian=np.radians(self.IncidenceAngle)
     n1n2_ReflectionAngle_Radian=np.radians(self.ReflectionAngle)
-    IncidenceAngle_Cos=np.cos(IncidenceAngle_Radian)#入射角コサイン
-    IncidenceAngle_Sin=np.sin(IncidenceAngle_Radian)#入射角サイン
+    IncidenceAngle_Cos=np.cos(IncidenceAngle_Radian)
+    IncidenceAngle_Sin=np.sin(IncidenceAngle_Radian)
 
-    n1n2_RefractionAngle_Radian=np.arcsin(np.sin(IncidenceAngle_Radian)*self.n1 / self.n2)#入射角の屈折角
+    n1n2_RefractionAngle_Radian=np.arcsin(np.sin(IncidenceAngle_Radian)*self.n1 / self.n2)
     n2n3_RefractionAngle_Radian=np.arcsin(np.sin(n1n2_RefractionAngle_Radian)*self.n2 / self.n3)
     n1n2_RefractionAngle_Cos=np.cos(n1n2_RefractionAngle_Radian)
     n2n3_RefractionAngle_Cos=np.cos(n2n3_RefractionAngle_Radian)
@@ -77,11 +77,11 @@ class StrucColor:#入射角と反射角と膜厚と屈折率と色空間と色�
     t21=(ts21+tp21)*0.5
 
     #光路差の計算
-    n1n2_RefractionAngle_Tan=np.tan(n1n2_RefractionAngle_Radian)#入射角の屈折角のタンジェント
+    n1n2_RefractionAngle_Tan=np.tan(n1n2_RefractionAngle_Radian)
     n2n3_ReflectionAngle_Sin = np.sin(n1n2_ReflectionAngle_Radian) / self.n2
-    n2n3_ReflectionAngle_Radian = np.arcsin(n2n3_ReflectionAngle_Sin)#反射角の屈折角
-    n2n3_ReflectionAngle_Cos=np.cos(n2n3_ReflectionAngle_Radian)#反射角の屈折角のコサイン
-    n2n3_ReflectionAngle_Tan=np.tan(n2n3_ReflectionAngle_Radian)#反射角の屈折角のタンジェント
+    n2n3_ReflectionAngle_Radian = np.arcsin(n2n3_ReflectionAngle_Sin)
+    n2n3_ReflectionAngle_Cos=np.cos(n2n3_ReflectionAngle_Radian)
+    n2n3_ReflectionAngle_Tan=np.tan(n2n3_ReflectionAngle_Radian)
     Optical_Path_Difference=self.n2*self.FilmThickness*(1/n1n2_RefractionAngle_Cos+1/n2n3_ReflectionAngle_Cos)-self.n1*self.FilmThickness*(n1n2_RefractionAngle_Tan+n2n3_ReflectionAngle_Tan)*IncidenceAngle_Sin#異角度光路差
     
     #構造色反射率の計算
