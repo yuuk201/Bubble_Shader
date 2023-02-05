@@ -12,7 +12,7 @@ lmdmin=390
 
  # C S V ファイルを読み込み, 配列に格納する
 def csv_read(file):
-  csvfile=open(file,'r',encoding='utf-8')
+  csvfile=open(file,'StrucColor_Reflectance',encoding='utf-8')
   reader=csv.reader(csvfile)
   ColorMatchingFunction = []
   ColorMatchingFunction2 = []
@@ -46,35 +46,38 @@ class StrucColor:#入射角と反射角と膜厚と屈折率と色空間と色�
     self.Calc_StrucColor()
     
   def Calc_Reflectance(self,wavelength):#構造色反射率を導出する関数
+    #入射角
     IncidenceAngle_Radian=np.radians(self.IncidenceAngle)
-    n1n2_ReflectionAngle_Radian=np.radians(self.ReflectionAngle)
     IncidenceAngle_Cos=np.cos(IncidenceAngle_Radian)
     IncidenceAngle_Sin=np.sin(IncidenceAngle_Radian)
 
+    #反射角
+    n1n2_ReflectionAngle_Radian=np.radians(self.ReflectionAngle)
+
+    #屈折角
     n1n2_RefractionAngle_Radian=np.arcsin(np.sin(IncidenceAngle_Radian)*self.n1 / self.n2)
     n2n3_RefractionAngle_Radian=np.arcsin(np.sin(n1n2_RefractionAngle_Radian)*self.n2 / self.n3)
     n1n2_RefractionAngle_Cos=np.cos(n1n2_RefractionAngle_Radian)
     n2n3_RefractionAngle_Cos=np.cos(n2n3_RefractionAngle_Radian)
 
-
     # フレネル反射率の計算
-    rs12 = (self.n1 * IncidenceAngle_Cos - self.n2 * n1n2_RefractionAngle_Cos) / (self.n1 * IncidenceAngle_Cos +self.n2 * n1n2_RefractionAngle_Cos)
-    rp12 = (self.n2 * IncidenceAngle_Cos - self.n1 * n1n2_RefractionAngle_Cos) / (self.n2 * IncidenceAngle_Cos + self.n1 * n1n2_RefractionAngle_Cos)
-    rs23 = (self.n2 * n1n2_RefractionAngle_Cos - self.n3 * n2n3_RefractionAngle_Cos) / (self.n2 * n1n2_RefractionAngle_Cos + self.n3 * n2n3_RefractionAngle_Cos)
-    rp23 = (self.n3 * n1n2_RefractionAngle_Cos - self.n2 * n2n3_RefractionAngle_Cos) / (self.n3 * n1n2_RefractionAngle_Cos + self.n2 * n2n3_RefractionAngle_Cos)
-    rs21 = (self.n2 * n1n2_RefractionAngle_Cos-self.n1 * IncidenceAngle_Cos) / (self.n2 * n1n2_RefractionAngle_Cos+self.n1 * IncidenceAngle_Cos)
-    rp21 = (self.n1 * n1n2_RefractionAngle_Cos-self.n2 * IncidenceAngle_Cos) / (self.n1 * n1n2_RefractionAngle_Cos+self.n2 * IncidenceAngle_Cos)
-    r12=(rs12+rp12)*0.5
-    r23=(rs23+rp23)*0.5
-    r21=(rs21+rp21)*0.5
+    n1n2_FresnelReflectance_Spolarized = (self.n1 * IncidenceAngle_Cos - self.n2 * n1n2_RefractionAngle_Cos) / (self.n1 * IncidenceAngle_Cos +self.n2 * n1n2_RefractionAngle_Cos)
+    n1n2_FresnelReflectance_Ppolarized = (self.n2 * IncidenceAngle_Cos - self.n1 * n1n2_RefractionAngle_Cos) / (self.n2 * IncidenceAngle_Cos + self.n1 * n1n2_RefractionAngle_Cos)
+    n2n3_FresnelReflectance_Spolarized = (self.n2 * n1n2_RefractionAngle_Cos - self.n3 * n2n3_RefractionAngle_Cos) / (self.n2 * n1n2_RefractionAngle_Cos + self.n3 * n2n3_RefractionAngle_Cos)
+    n2n3_FresnelReflectance_Ppolarized = (self.n3 * n1n2_RefractionAngle_Cos - self.n2 * n2n3_RefractionAngle_Cos) / (self.n3 * n1n2_RefractionAngle_Cos + self.n2 * n2n3_RefractionAngle_Cos)
+    n2n1_FresnelReflectance_Spolarized = (self.n2 * n1n2_RefractionAngle_Cos-self.n1 * IncidenceAngle_Cos) / (self.n2 * n1n2_RefractionAngle_Cos+self.n1 * IncidenceAngle_Cos)
+    n2n1_FresnelReflectance_Ppolarized = (self.n1 * n1n2_RefractionAngle_Cos-self.n2 * IncidenceAngle_Cos) / (self.n1 * n1n2_RefractionAngle_Cos+self.n2 * IncidenceAngle_Cos)
+    n2n1_FresnelReflectance=(n1n2_FresnelReflectance_Spolarized+n1n2_FresnelReflectance_Ppolarized)*0.5
+    n2n3_FresnelReflectance=(n2n3_FresnelReflectance_Spolarized+n1n2_FresnelReflectance_Ppolarized)*0.5
+    n2n1_FresnelReflectance=(n2n1_FresnelReflectance_Spolarized+n2n1_FresnelReflectance_Ppolarized)*0.5
 
     #フレネル透過率の計算
-    ts12=2*self.n1*IncidenceAngle_Cos/(self.n1*IncidenceAngle_Cos+self.n2*n1n2_RefractionAngle_Cos)
-    tp12=2*self.n1*IncidenceAngle_Cos/(self.n1*n1n2_RefractionAngle_Cos+self.n2*IncidenceAngle_Cos)
-    ts21=2*self.n2*n1n2_RefractionAngle_Cos/(self.n2*n1n2_RefractionAngle_Cos+self.n1*IncidenceAngle_Cos)
-    tp21=2*self.n2*n1n2_RefractionAngle_Cos/(self.n2*IncidenceAngle_Cos+self.n1*n1n2_RefractionAngle_Cos)
-    t12=(ts12+tp12)*0.5
-    t21=(ts21+tp21)*0.5
+    n1n2_FresnelTransmittance_Spolarized=2*self.n1*IncidenceAngle_Cos/(self.n1*IncidenceAngle_Cos+self.n2*n1n2_RefractionAngle_Cos)
+    n1n2_FresnelTransmittance_Ppolarized=2*self.n1*IncidenceAngle_Cos/(self.n1*n1n2_RefractionAngle_Cos+self.n2*IncidenceAngle_Cos)
+    n2n1_FresnelTransmittance_Spolarized=2*self.n2*n1n2_RefractionAngle_Cos/(self.n2*n1n2_RefractionAngle_Cos+self.n1*IncidenceAngle_Cos)
+    n2n1_FresnelTransmittance_Ppolarized=2*self.n2*n1n2_RefractionAngle_Cos/(self.n2*IncidenceAngle_Cos+self.n1*n1n2_RefractionAngle_Cos)
+    n1n2_FresnelTransmittance=(n1n2_FresnelTransmittance_Spolarized+n1n2_FresnelTransmittance_Ppolarized)*0.5
+    n2n1_FresnelTransmittance=(n2n1_FresnelTransmittance_Spolarized+n2n1_FresnelTransmittance_Ppolarized)*0.5
 
     #光路差の計算
     n1n2_RefractionAngle_Tan=np.tan(n1n2_RefractionAngle_Radian)
@@ -85,20 +88,20 @@ class StrucColor:#入射角と反射角と膜厚と屈折率と色空間と色�
     Optical_Path_Difference=self.n2*self.FilmThickness*(1/n1n2_RefractionAngle_Cos+1/n2n3_ReflectionAngle_Cos)-self.n1*self.FilmThickness*(n1n2_RefractionAngle_Tan+n2n3_ReflectionAngle_Tan)*IncidenceAngle_Sin#異角度光路差
     
     #構造色反射率の計算
-    Phase_Diferrence = (2.0 * np.pi * Optical_Path_Difference) / wavelength
-    r=np.square(np.abs(r12+t12*t21*r23*np.exp(1j*Phase_Diferrence)/(1-r23*r21*np.exp(1j*Phase_Diferrence))))
-    return r
+    Phase_Difference = (2.0 * np.pi * Optical_Path_Difference) / wavelength
+    StrucColor_Reflectance=np.square(np.abs(n2n1_FresnelReflectance+n1n2_FresnelTransmittance*n2n1_FresnelTransmittance*n2n3_FresnelReflectance*np.exp(1j*Phase_Difference)/(1-n2n3_FresnelReflectance*n2n1_FresnelReflectance*np.exp(1j*Phase_Difference))))
+    return StrucColor_Reflectance
 
   def Calc_StrucColor(self):
     wavelengths = ColorMatchingFunction[:, 0]
     xyz = np.zeros(3)
 
-    r=self.Calc_Reflectance(wavelengths)
+    StrucColor_Reflectance=self.Calc_Reflectance(wavelengths)
 
     # 反射率を, XYZ色空間に変換
-    xyz[0] = integrate.simps(r * ColorMatchingFunction[:,1] * self.ColorTemperature[:,1], wavelengths)
-    xyz[1] = integrate.simps(r * ColorMatchingFunction[:,2] * self.ColorTemperature[:,1], wavelengths)
-    xyz[2] = integrate.simps(r * ColorMatchingFunction[:,3] * self.ColorTemperature[:,1], wavelengths)
+    xyz[0] = integrate.simps(StrucColor_Reflectance * ColorMatchingFunction[:,1] * self.ColorTemperature[:,1], wavelengths)
+    xyz[1] = integrate.simps(StrucColor_Reflectance * ColorMatchingFunction[:,2] * self.ColorTemperature[:,1], wavelengths)
+    xyz[2] = integrate.simps(StrucColor_Reflectance * ColorMatchingFunction[:,3] * self.ColorTemperature[:,1], wavelengths)
     k = integrate.simps(ColorMatchingFunction[:,2] * self.ColorTemperature[:,1], wavelengths)
     xyz *= 1/k
 
